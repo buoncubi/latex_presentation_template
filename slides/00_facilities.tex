@@ -1,5 +1,7 @@
 
 %%%%%%%%%%%%%%%%%% for itemize check and unckec (\cmark, \xmark)
+\usepackage{pifont}
+\usepackage{amssymb}
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 
@@ -9,6 +11,7 @@
 }
 
 %%%%%%%%%%%%%%%%%% for dia graph (\rawInputTikZ{.9}{file.tex}, \inputTikZ{.9}{file.tex})
+\usepackage{tikz}
 \newcommand{\rawInputTikZ}[2]{%  
      \scalebox{#1\linewidth}{\input{./figures/#2}}%
 }
