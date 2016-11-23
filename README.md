@@ -11,3 +11,9 @@ the structure is composed by:
 	- contains the last frame template (*02_question.tex*)
 	- contains the references frame template (*bib.tex*)
  - *presentation template.tex* is the main project file and contains the actual presentation (see the comments here for more!)
+
+# check and update last changes
+see AIRO 2016 presentation. Not up to date
+ - title conference
+ - toc frame hearder
+ - facilities
