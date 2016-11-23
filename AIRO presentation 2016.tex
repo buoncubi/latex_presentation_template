@@ -1,0 +1,160 @@
+\documentclass{beamer}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SETTINGS
+%----------------------------------------------------------------------------------------
+\mode<presentation> {
+% other possibilities for themes (choose one): default, AnnArbor, Antibes, Bergen, Berkeley, Berlin, Boadilla, CambridgeUS, Copenhagen, Darmstadt, Dresden, Frankfurt, Goettingen, Hannover, Ilmenau, Luebeck, Madrid, Malmoe, Marburg, Montpellier, PaloAlto, Pittsburgh, Rochester, Singapore, Szeged, Warsaw.
+	\usetheme{JuanLesPins}
+% other possibilities for color (choose one): seagull, albatross, beaver, beetle, crane, dolphin, dove, fly, lily, orchid, rose, seahorse, whale, wolverine.
+	\usecolortheme{seagull}
+}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{itemize item}[ball]
+\setbeamertemplate{enumerate items}[ball]
+\setbeamertemplate{section in toc}[ball]
+\setbeamertemplate{subsection in toc}[false]
+\setbeamertemplate{footline}[page number]
+
+
+%----------------------------------------------------------------------------------------
+%	IMPORTING
+%----------------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\usepackage{tikz}% for dia images
+\usepackage{pifont}\usepackage{amssymb}% for itemize check and uncheck
+
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+% minimum title requirements: \theShortTitle, \theTitle, \theAuthor, \theShortInstitute, \theInstitute, \theDate
+
+%%%%%%% template for \titleFrame{01_title-intern.tex} (in the slide folder) 
+%%%%%%% use it for internal presentation in the university
+% \newcommand{\theTitle}{The Title}
+% \newcommand{\theShortTitle}{The sub Title}
+% \newcommand{\thePosition}{Curriculum in whatever}
+% \newcommand{\theAccademicYear}{academic year 2015--2016}
+% \newcommand{\theAuthor}{Me Name\\ \href{mailto:me@me.me}{me@me.me}}
+% \newcommand{\theProf}{Prof Name\\ \href{mailto:he@he.he}{he@he.he}}
+% \newcommand{\theInstitute}{
+% 	\href{http://www.unige.it/}{University of Genoa},\\
+% 	\href{http://www.dibris.unige.it/}{DIBRIS},
+% }
+% \newcommand{\theShortInstitute}{\href{https://github.com/EmaroLab}{EMAROlab}}
+% \newcommand{\theDate}{\today}
+
+%%%%%%% template for \titleFrame{01_title-extern.tex} (in the slide folder)
+%%%%%%% use it for external presentations from the university
+% \newcommand{\theTitle}{The Full Title}
+% \newcommand{\theShortTitle}{short title}
+% \newcommand{\theAuthor}{Me Name\\ \href{mailto:me@me.me}{me@me.me}}
+% \newcommand{\theInstitute}{
+% 	\href{http://www.unige.it/}{University of Genoa},
+% 	\href{http://www.dibris.unige.it/}{DIBRIS departement},
+% 	\href{https://github.com/EmaroLab}{EMAROlab}.
+% }
+% \newcommand{\theShortInstitute}{EMAROlab, DIBRIS department at the University of Genoa.}
+% \newcommand{\theDate}{\today}
+
+%%%%%%% template for \titleFrame{01_title-extern2.tex} (in the slide folder)
+%%%%%%% use it for external presentations from the university
+\newcommand{\theTitle}{The Full Title}
+\newcommand{\theShortTitle}{short title}
+\newcommand{\theAuthor}{Me Name\\ \href{mailto:me@me.me}{me@me.me}}
+\newcommand{\theCooathor}{Me Name\\ \href{mailto:me@me.me}{me@me.me}}
+\newcommand{\theInstitute}{
+	\href{http://www.unige.it/}{University of Genoa},
+	\href{http://www.dibris.unige.it/}{DIBRIS departement},
+	\href{https://github.com/EmaroLab}{EMAROlab}.
+}
+\newcommand{\theShortInstitute}{EMAROlab, DIBRIS department at the University of Genoa.}
+\newcommand{\theDate}{\today}
+
+
+
+%----------------------------------------------------------------------------------------
+%	FACILITY
+%----------------------------------------------------------------------------------------
+% 1) for itemize check and unckec (\cmark, \xmark)
+% 2) for easy quete "something" (\QUOTE{something})
+% 3) for dia graph (\rawInputTikZ{.9}{file.tex}, \inputTikZ{.9}{file.tex})
+% 4) for easy divide on minipage
+% 		\halfPage{LeftContents}{RightContents}
+% 		\halfMiniPage{LeftSize}{LeftContents}{RightSize}{RightContents}
+% 		\thirdPage{LeftContents}{MiddleContents}{RightContents}
+% 		\thirdMiniPage{LeftSize}{LeftContents}{MiddleContents}{RightContents}{RightSize}{RightContents}
+% 5) for adding for instance a pdf image as a full slide \fillSlide{file.pdf}
+% 6) for textual blocks and pop-ups
+% 		\Block{.9}{Contents}
+%			\titleBlock{.9}{Title}{Contents} 
+% 		\blockCol{.9}{Contents}
+% 			\titleBlockCol{.9}{AAA}{BBB}
+% 		\blockPop{\uncover<2-4>}{.9}{Contents}  
+% 			\titleBlockPop{\uncover<2-4>}{.9}{Title}{Contents}  
+%		 \blockColPop{\only<2-4>}{.9}{Contents}
+% 			\titleBlockColPop{\only<2-4>}{.9}{Title}{Contents}
+%		 \blockPopOfset{\uncover<2-4>}{-3cm}{.9}{Contents}       
+% 			\titleBlockPopOfset{\uncover<2-4>}{-3cm}{.9}{Title}{Contents}       
+% 		\blockColPopOfset{\only<2-4>}{-3cm}{.9}{Contents}
+% 		\titleBlockColPopOfset{\only<2-4>}{-3cm}{.9}{Title}{Contents}
+% 7) for show agenda presentation contents:
+% 		\fullToc				: prints a slide with the complete toc
+% 		\secToc				: prints a slide with the actual section in toc
+% 		\subsecToc			: prints a slide with the actual sub section in toc
+% 8) for show common slides
+%		\titleFrame			: prints the title slide
+% 		\questionFrame		: prints the final slide
+% 		\Frame{T}{C}			: prints a slide with title T and contents C
+%2
+% check also: \onslide<j>, \only<j>, \item<j-> and \uncover<j->
+\input{./slides/00_facilities.tex}
+
+
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+\begin{document}
+% print the title
+\titleFrame{01_title-extern2.tex}
+
+% print the toc
+\fullToc
+
+% set section
+\section{TEST}
+\subsection{SUB TEST}
+
+% print a slide with an animation <1-2>
+\Frame{PRESENTATION TEMPLATE}{
+	\titleBlockCol{.9}{HINT}{Read the comments above in the latex code}
+	\vfill
+	\blockPop{\onslide<2->}{.4}{\footnotesize And check out possible customization in the title by looking at the two examples.}
+}
+
+% print the actual section
+\subsecToc
+
+% change section
+\section{easy}
+	
+% make a concluding slide
+\Frame{CONCLUSION}{	go to do useful works !! (e.g., \cite{dl})}	
+	
+% ask for question
+\questionFrame
+
+% show bibliography (to be filled with item manually)
+\input{./slides/bib.tex}
+
+\end{document}

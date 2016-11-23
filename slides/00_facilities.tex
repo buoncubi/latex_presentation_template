@@ -1,0 +1,157 @@
+
+%%%%%%%%%%%%%%%%%% for itemize check and unckec (\cmark, \xmark)
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+%%%%%%%%%%%%%%%%%% for easy quete "something" (\QUOTE{something})
+\newcommand{\QUOTE}[1]{%
+	\textquotedblleft #1\textquotedblright%
+}
+
+%%%%%%%%%%%%%%%%%% for dia graph (\rawInputTikZ{.9}{file.tex}, \inputTikZ{.9}{file.tex})
+\newcommand{\rawInputTikZ}[2]{%  
+     \scalebox{#1\linewidth}{\input{./figures/#2}}%
+}
+\newcommand{\inputTikZ}[2]{%  
+	 \begin{center}\scalebox{.9\linewidth}{\Large{\input{./figures/#2}}}\end{center}%
+}
+
+%%%%%%%%%%%%%%%%%% for easy divide on minipage
+% \halfPage{LeftContents}{RightContents}
+% \halfMiniPage{LeftSize}{LeftContents}{RightSize}{RightContents}
+% \thirdPage{LeftContents}{MiddleContents}{RightContents}
+% \thirdMiniPage{LeftSize}{LeftContents}{MiddleContents}{RightContents}{RightSize}{RightContents}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\halfMiniPage}[4]{
+	\noindent\begin{minipage}{#1\linewidth}%
+		#3%
+	\end{minipage}\hfill\noindent\begin{minipage}{#2\linewidth}%
+		#4%
+	\end{minipage}\\%
+}
+\newcommand{\halfPage}[2]{\halfMiniPage{.45}{.45}{#1}{#2}}
+\newcommand{\thirdMiniPage}[6]{%
+	\noindent\begin{minipage}{#1\linewidth}%
+		#2%
+	\end{minipage}\hfill\noindent\begin{minipage}{#3\linewidth}
+		#4%
+	\end{minipage}\hfill\noindent\begin{minipage}{#5\linewidth}
+		#6%
+	\end{minipage}\\%
+}
+\newcommand{\thirdPage}[3]{\thirdPage{.3}{.3}{.3}{#1}{#2}{#3}}
+
+
+%%%%%%%%%%%%%%%%%% for adding for instance a pdf image as a full slide \fillSlide{file.pdf}
+\newcommand{\fillSlide}[1]{
+\vspace*{-.53cm}\titleBlockCol{1}{}{\begin{figure}[!h]\centering \hspace*{-0cm}\includegraphics[width=.92\textwidth]{#1}\end{figure}}
+}
+
+%%%%%%%%%%%%%%%%%% EXAMPLES for textual blocks and pop-ups
+% \Block{.9}{Contents}
+% \titleBlock{.9}{Title}{Contents} 
+%
+% \blockCol{.9}{Contents}
+% \titleBlockCol{.9}{AAA}{BBB}
+%
+% \blockPop{\uncover<2-4>}{.9}{Contents}  
+% \titleBlockPop{\uncover<2-4>}{.9}{Title}{Contents}  
+%     
+% \blockColPop{\only<2-4>}{.9}{Contents}
+% \titleBlockColPop{\only<2-4>}{.9}{Title}{Contents}
+%
+% \blockPopOfset{\uncover<2-4>}{-3cm}{.9}{Contents}       
+% \titleBlockPopOfset{\uncover<2-4>}{-3cm}{.9}{Title}{Contents}       
+%
+% \blockColPopOfset{\only<2-4>}{-3cm}{.9}{Contents}
+% \titleBlockColPopOfset{\only<2-4>}{-3cm}{.9}{Title}{Contents}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% primitive block definition
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+  	\setlength{\textwidth}{#1}%
+  	\begin{actionenv}#3%
+    	\def\insertblocktitle{#2}%
+    	\par%
+    	\usebeamertemplate{block begin}%
+  	}{\par%
+    	\usebeamertemplate{block end}%
+	\end{actionenv}%
+}%
+\newenvironment{varblockCol}[3]{%
+	\setbeamercolor{block body}{#2}%
+	\setbeamercolor{block title}{#3}%
+	\begin{block}{#1}}{\end{block}%
+}
+% facility blocks      
+\newcommand{\Block}[2]{% a simple block 
+\begin{center}\begin{minipage}{#1\linewidth}\begin{varblock}{}#2\end{varblock}\end{minipage}\end{center}%
+}
+\newcommand{\titleBlock}[3]{% a block with a title
+\begin{center}\begin{minipage}{#1\linewidth}\begin{varblock}{#2}#3\end{varblock}\end{minipage}\end{center}%
+}
+\newcommand{\blockCol}[2]{% it defines the color of all the Col blocks !!!
+ \begin{center}\begin{minipage}{#1\linewidth}\begin{varblockCol}{}{bg=blue!15,fg=black}{bg=blue,fg=white}{#2}\end{varblockCol}\end{minipage}\end{center}%
+}
+\newcommand{\titleBlockCol}[3]{% it defines the color of all the Col blocks !!!
+ \begin{center}\begin{minipage}{#1\linewidth}\begin{varblockCol}{#2}{bg=blue!15,fg=black}{bg=blue,fg=white}{#3}\end{varblockCol}\end{minipage}\end{center}%
+}
+\newcommand{\blockPop}[3]{#1{\Block{#2}{#3}}}
+\newcommand{\titleBlockPop}[4]{#1{\titleBlock{#2}{#3}{#4}}}
+\newcommand{\blockColPop}[3]{#1{\blockCol{#2}{#3}}}
+\newcommand{\titleBlockColPop}[4]{#1{\titleBlockCol{#2}{#3}{#4}}}
+\newcommand{\blockPopOfset}[4]{#1{\vspace*{#2}\Block{#3}{#4}}}
+\newcommand{\titleBlockPopOfset}[5]{#1{\vspace*{#2}\titleBlock{#3}{#4}{#5}}}
+\newcommand{\blockColPopOfset}[4]{#1{\vspace*{#2}\blockCol{#3}{#4}}}
+\newcommand{\titleBlockColPopOfset}[5]{#1{\vspace*{#2}\titleBlockCol{#3}{#4}{#5}}}
+
+
+%----------------------------------------------------------------------------------------
+%	TOC
+%----------------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%% example to show agenda presentation contents:
+% \titleFrame			: prints the title slide
+% \fullToc				: prints a slide with the complete toc
+% \secToc				: prints a slide with the actual section in toc
+% \subsecToc			: prints a slide with the actual sub section in toc
+% \questionFrame		: prints the final slide
+% \Frame{T}{C}			: prints a slide with title T and contents C
+% \coloredBlock{T}{C}	: prints a colored pop up on the slide (with title T and contents C) 
+% check also: \onslide<j>, \only<j>, \item<j-> and \uncover<j->
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tocTitle}{Contents:}
+\newcommand{\fullToc}{%
+		\begin{frame}%
+				\frametitle{\tocTitle}%
+				\tableofcontents%
+		\end{frame}%
+}
+\newcommand{\secToc}{%
+		\begin{frame}%
+				\frametitle{\tocTitle}%
+				\tableofcontents[currentsection]%
+		\end{frame}%
+}
+\newcommand{\subsecToc}{%
+		\begin{frame}%
+				\frametitle{\tocTitle}%
+				\tableofcontents[currentsection,currentsubsection]%
+		\end{frame}%
+}
+
+\newcommand{\titleFrame}[1]{\input{./slides/#1}}
+\newcommand{\questionFrame}{\input{./slides/02_question.tex}}
+\newcommand{\Frame}[2]{%
+	\begin{frame}%
+		\frametitle{#1}%
+		#2%
+	\end{frame}%
+}
+
+%----------------------------------------------------------------------------------------
+%	DEFAULTS TITLES
+%----------------------------------------------------------------------------------------
+% do not modify this:
+\title[\theShortTitle]{\theTitle}
+\author{\theAuthor}
+\institute[\theShortInstitute]{\theInstitute}
+\date{\theDate}
