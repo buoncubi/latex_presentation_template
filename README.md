@@ -13,7 +13,7 @@ the structure is composed by:
  - *presentation template.tex* is the main project file and contains the actual presentation (see the comments here for more!)
 
 # check and update last changes
-see AIRO 2016 presentation. Not up to date
+see AIRO 2016 presentation. Not up to date:
  - title conference
  - toc frame hearder
  - facilities
