@@ -1,0 +1,3 @@
+use DIA (http://dia-installer.de/) to generate image in tex format and see the utility \inputTikZ and \rawInputTikZ in the ./slide/00_facilities.tex file to know more.
+
+this folder is thought to contains the source images from which latex printable file are generated (e.g., pdf, eps, tex...). The latter should be contained in the figures (root) folder
